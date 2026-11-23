@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Corner Shelf — books from the block, for the block</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>The Corner Shelf</h1>
+    <p class="tagline">books from the block, for the block. take one, leave one.</p>
+    <p class="meta" id="shelf-meta">corner of 5th &amp; Mercer — the little free library with the green door</p>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+
+    <section>
+      <h2>what's on the shelf</h2>
+      <p class="sub">real books, right here, right now. green means it's here — amber means somebody's got it till the date shown.</p>
+      <div class="shelf-grid" id="shelf-grid"><p class="sub">loading the shelf…</p></div>
+    </section>
+
+    <section>
+      <h2>holla at the librarian</h2>
+      <p class="sub">she runs this shelf. ask her what's here, borrow something, bring something back — or ask her to check the Northside branch when we ain't got it.</p>
+      <div id="chat">
+        <div id="log">
+          <div class="msg agent">hey, I'm the librarian. what you lookin' for?</div>
+        </div>
+        <div class="chips" id="chips"></div>
+        <div class="row">
+          <input type="text" id="ask" placeholder="what you lookin' for?" autocomplete="off">
+          <button id="send">ask</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <details id="receipts-box">
+        <summary>the receipts — what just happened under the hood</summary>
+        <p class="sub" style="margin-top:8px">every step the runtime took: which engine ran, who it called, who it asked, what it confirmed. no secrets in here, ever.</p>
+        <pre id="trace">nothing yet — ask the librarian something.</pre>
+      </details>
+    </section>
+
+    <section>
+      <h2>bring your own brain</h2>
+      <p class="sub">out the box, the librarian runs on the house engine — a little local engine, no key, no cost, no cloud. got your own key for an OpenAI-style router? plug it in and she'll use that instead. your key stays in your browser and only ever goes to your router — never to another site.</p>
+      <div id="settings">
+        <div class="engine-pick">
+          <label><input type="radio" name="engine" value="house" checked> house engine (local, free)</label>
+          <label><input type="radio" name="engine" value="byok"> my own router + key</label>
+        </div>
+        <div id="byok-fields" style="display:none">
+          <label for="router-url">router URL (OpenAI-compatible)</label>
+          <input type="url" id="router-url" placeholder="https://api.openai.com/v1" autocomplete="off">
+          <label for="router-model">model</label>
+          <input type="text" id="router-model" placeholder="gpt-4o-mini" autocomplete="off">
+          <label for="router-key">key</label>
+          <input type="password" id="router-key" placeholder="sk-…" autocomplete="off">
+          <p class="note">saved in this browser only. hit "forget it" and it's gone.</p>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <button id="save-settings">save</button>
+          <button id="forget-settings" class="ghost">forget it</button>
+          <span id="settings-state" class="note" style="align-self:center"></span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <p>open source (MIT). the agent files live right here on this site: <a href="agent-manifest.json">agent-manifest.json</a> · <a href="corner-shelf.network.json">corner-shelf.network.json</a> · <a href="links.json">links.json</a>. any other agent site can load this shelf the same way we load Northside — that's the whole point.</p>
+  </div>
+</footer>
+
+<div class="modal-back" id="consent-modal">
+  <div class="modal">
+    <h3>mind if I ask the other branch?</h3>
+    <p id="consent-text">the Northside Shelf has its own books. I can ask their librarian — but that's another site, so it's your call.</p>
+    <p class="origin" id="consent-origin"></p>
+    <p class="note" style="color:#6b7280;font-size:13px">they won't see this chat, and they won't see any key you saved here. just the question.</p>
+    <div class="btns">
+      <button class="ghost" id="consent-no">nah, keep it here</button>
+      <button id="consent-yes">yeah, ask 'em</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-back" id="confirm-modal">
+  <div class="modal">
+    <h3>you sure?</h3>
+    <p id="confirm-text"></p>
+    <div class="btns">
+      <button class="ghost" id="confirm-no">nah, never mind</button>
+      <button id="confirm-yes">yeah, do it</button>
+    </div>
+  </div>
+</div>
+
+<script src="runtime.js"></script>
+<script src="engines.js"></script>
+<script src="site-actions.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
